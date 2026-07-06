@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дни Эрмитажа | Игра в гуся</title>
+  <link rel="stylesheet" href="css/output.css" />
+  <style>
+    /* === АДАПТИВНОСТЬ УЗОРОВ В ХЕДЕРЕ === */
+    
+    /* По умолчанию мобильные узоры скрыты */
+    .header-ornament-mobile {
+      display: none !important;
+    }
+
+    /* Когда экран становится меньше 640px (только центральный блок) */
+    @media (max-width: 640px) {
+      /* Скрываем боковые узоры */
+      .header-ornament-desktop {
+        display: none !important;
+      }
+      
+      /* Показываем мобильные узоры внутри центрального блока */
+      .header-ornament-mobile {
+        display: flex !important;
+      }
+      
+      /* Центральный блок занимает всю ширину */
+      .header-center-block {
+        max-width: 92% !important;
+        width: 92% !important;
+        min-height: 200px !important;
+        padding: 6px 12px !important;
+      }
+      
+      /* Узоры внутри блока — ЕЩЁ БОЛЬШЕ */
+      .header-ornament-mobile {
+        width: 50%;
+        max-width: 140px;
+        height: auto;
+        aspect-ratio: auto;
+        flex-shrink: 0;
+      }
+      
+      .header-ornament-mobile img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: rotate(90deg);
+        display: block;
+      }
+      
+      /* Отступы между узорами и текстом */
+      .header-ornament-top {
+        margin-bottom: 2px;
+      }
+      
+      .header-ornament-bottom {
+        margin-top: 2px;
+      }
+      
+      /* Уменьшаем отступы текста, чтобы узоры не перекрывались */
+      .header-center-block .text-center {
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+      }
+      
+      .header-center-block h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      .header-center-block p {
+        font-size: 0.85rem !important;
+        margin-top: 2px !important;
+      }
+    }
+
+    /* Для очень маленьких экранов (менее 400px) */
+    @media (max-width: 400px) {
+      .header-ornament-mobile {
+        width: 45%;
+        max-width: 100px;
+      }
+      
+      .header-center-block {
+        padding: 4px 8px !important;
+        min-height: 140px !important;
+      }
+      
+      .header-center-block h1 {
+        font-size: 1.4rem !important;
+      }
+      
+      .header-center-block p {
+        font-size: 0.75rem !important;
+      }
+    }
+
+    /* Для планшетов (641-1024px) — показываем уменьшенные боковые узоры */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .header-ornament-desktop {
+        display: flex !important;
+        max-width: 150px !important;
+        min-width: 60px !important;
+        width: 20% !important;
+      }
+      
+      .header-center-block {
+        max-width: 60% !important;
+        width: 60% !important;
+        min-height: 300px !important;
+        padding: 0 20px !important;
+      }
+      
+      .header-ornament-mobile {
+        display: none !important;
+      }
+    }
+
+    /* Десктоп (1025px и выше) — полный размер */
+    @media (min-width: 1025px) {
+      .header-ornament-desktop {
+        display: flex !important;
+        max-width: 412px !important;
+        min-width: 80px !important;
+        width: 28% !important;
+      }
+      
+      .header-center-block {
+        max-width: 497px !important;
+        width: 44% !important;
+        min-height: 400px !important;
+        padding: 0 56px !important;
+      }
+      
+      .header-ornament-mobile {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== БОКОВЫЕ БОРДЮРЫ ===== -->
+  <div class="border-left-container absolute left-0 top-0 z-0 pointer-events-none hidden lg:block" style="width:100px; max-width:100px; height:100%; min-height:100vh;">
+    <div class="border-left-inner w-full h-full" style="min-height:100vh; background: url('assets/images/vectors/left-border.svg') repeat-y center; background-size: contain;"></div>
+  </div>
+  <div class="border-right-container absolute right-0 top-0 z-0 pointer-events-none hidden lg:block" style="width:100px; max-width:100px; height:100%; min-height:100vh;">
+    <div class="border-right-inner w-full h-full" style="min-height:100vh; background: url('assets/images/vectors/right-border.svg') repeat-y center; background-size: contain;"></div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="relative w-full bg-[#5A573F] py-8 md:py-12 lg:py-16 z-10">
+    <div class="absolute left-0 w-full bg-[#B49567] z-20" style="top:4%; height:2px;"></div>
+    <div class="relative w-full flex items-stretch justify-center px-4 sm:px-8 lg:px-16" style="min-height:60vh; max-height:80vh;">
+
+      <!-- Левый узор (десктоп/планшет) -->
+      <div class="hidden sm:flex items-stretch justify-start flex-shrink-0 header-ornament-desktop" style="width:28%; max-width:412px; min-width:80px;">
+        <img src="assets/images/vectors/header-left.svg" alt="" class="w-full h-full object-contain object-left opacity-100" style="padding:2% 5% 2% 0;" onerror="this.style.display='none'" />
+      </div>
+
+      <!-- Центральный блок -->
+      <div class="relative z-10 flex-shrink-0 flex flex-col items-center justify-center border-2 border-[#B49567] bg-transparent px-6 md:px-10 lg:px-14 header-center-block" style="max-width:497px; width:44%; min-width:200px; min-height:400px;">
+        
+        <!-- Верхний узор (мобильный) -->
+        <div class="header-ornament-mobile header-ornament-top w-full flex justify-center">
+          <img src="assets/images/vectors/header-left.svg" alt="" class="w-full h-full object-contain" style="transform:rotate(90deg);" onerror="this.style.display='none'" />
+        </div>
+
+        <div class="text-center py-2 md:py-8 lg:py-12 w-full">
+          <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-carmen text-[#B49567] leading-tight">Дни Эрмитажа</h1>
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl font-munson text-[#B49567] mt-1 md:mt-2 lg:mt-3">в Сыктывкаре</p>
+        </div>
+
+        <!-- Нижний узор (мобильный) -->
+        <div class="header-ornament-mobile header-ornament-bottom w-full flex justify-center">
+          <img src="assets/images/vectors/header-right.svg" alt="" class="w-full h-full object-contain" style="transform:rotate(90deg);" onerror="this.style.display='none'" />
+        </div>
+      </div>
+
+      <!-- Правый узор (десктоп/планшет) -->
+      <div class="hidden sm:flex items-stretch justify-end flex-shrink-0 header-ornament-desktop" style="width:28%; max-width:412px; min-width:80px;">
+        <img src="assets/images/vectors/header-right.svg" alt="" class="w-full h-full object-contain object-right opacity-100" style="padding:2% 0 2% 5%;" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </header>
+
+  <main class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-8 z-10">
+
+    <!-- ===== БЛОК "Путешествие по страницам истории" ===== -->
+    <section class="flex flex-col md:flex-row gap-8 md:gap-12 items-start my-12">
+      <div class="w-full md:w-1/2 aspect-[4/3] bg-[#B9A997]/30 rounded-2xl overflow-hidden shadow-lg border border-[#B49567]/30 flex-shrink-0">
+        <img src="assets/images/game.jpg" alt="Игра в гуся" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x450?text=Игра+в+гуся'" />
+      </div>
+      <div class="w-full md:w-1/2">
+        <h2 class="text-2xl md:text-4xl font-carmen text-[#5A573F] mb-4">Путешествие по страницам истории</h2>
+        <div class="text-[#5A573F]/90 leading-relaxed font-munson text-sm md:text-base space-y-3">
+          <p>Вы когда-нибудь играли в настольную игру, где нужно бросать кубик и передвигать фишку по клеткам-событиям? Оказывается, прародительница всех таких игр появилась очень давно! Это знаменитая «Игра в гуся» (Jeu de l'Oie), которая была невероятно популярна в Европе с XVI века. В неё играли и простые горожане, и знатные вельможи, и даже будущие короли Франции. Один из вариантов этой игры, выпущенный как раз в 1780 году, вдохновил нас на создание этого сайта.</p>
+          <p>Мы приглашаем вас отправиться в такое же увлекательное путешествие, но не по игровому полю, а по дорогам истории! Вместо клеток с гусём, мостом или тюрьмой вас ждут 32 квадратика-события из эпохи правления короля Людовика XVI и его супруги Марии-Антуанетты. «Бросайте кубик» (просто нажимайте на клетки по порядку) и узнавайте интересные факты о знаменитых людях, громких открытиях и удивительных происшествиях того времени. Это не просто сайт, а настоящее путешествие в прошлое Франции!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== БЛОК С ТРОПОЙ ===== -->
+    <section class="my-12">
+      <h2 class="text-2xl md:text-5xl font-carmen text-[#5A573F] text-center mb-6">Игра в гуся при дворе Марии-Антуанетты</h2>
+      <div class="trail-container relative w-full max-w-5xl mx-auto" style="aspect-ratio: 1160 / 5982;">
+        <img src="assets/images/vectors/trail.svg" alt="Тропа" class="w-full h-full block" onerror="this.style.display='none'" />
+        <!-- Ячейки генерируются JS -->
+      </div>
+    </section>
+
+    <!-- ===== БЛОК ПОБЕДЫ ===== -->
+    <section class="my-16 text-center py-8 border-t border-[#B49567]/30">
+      <h2 class="text-3xl md:text-4xl font-carmen text-[#5A573F]">C'est gagné! Это победа!</h2>
+      <div class="text-[#5A573F]/80 mt-4 font-munson max-w-3xl mx-auto text-sm md:text-base leading-relaxed space-y-3">
+        <p>Вы прошли весь путь — от раскопок древних Помпей до последнего дня Версальского двора. Эти 32 шага охватывают всего несколько десятилетий, но сколько всего произошло за это время: великие открытия, громкие премьеры, тайные интриги, взлёты и падения. Вы увидели Францию накануне бури, когда роскошь соседствовала с голодом, а искусство и наука стремительно меняли мир.</p>
+        <p>Как и в настоящей игре в гуся, на этом пути были свои победы, свои «передышки» и даже свои «опасные клетки». Но самое главное — это не просто набор фактов, а живая история, которую можно потрогать, понять и прочувствовать.</p>
+        <p>Пришло время вернуться к началу и бросить кубик снова? А может, вы хотите сами узнать больше о той эпохе? Загляните в книги, музеи или документальные фильмы — ведь каждый из этих 32 шагов открывает дверь в целый мир, полный удивительных историй.</p>
+        <p>Спасибо, что были с нами в этом путешествии! Ваше внимание и любопытство — лучшая награда для хранителей прошлого. До новых встреч на страницах истории!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== ФУТЕР ===== -->
+  <footer class="relative w-full bg-[#5A573F] z-10 mt-16">
+    <div class="absolute top-0 left-0 w-full bg-[#B49567] z-20" style="height:2px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-12 md:py-16">
+      <div class="text-center mb-10 md:mb-12">
+        <p class="text-[#B49567] font-munson text-sm md:text-base opacity-80">© 1998–2026 Государственный Эрмитаж. Все права защищены.</p>
+      </div>
+      <div class="flex flex-col md:flex-row items-start gap-8 md:gap-12 relative">
+        <div class="absolute -left-16 top-0 hidden lg:block" style="width:80px;">
+          <img src="assets/images/vectors/logo-hermitage-footer.svg" alt="Логотип Эрмитажа" class="w-full h-auto opacity-80" onerror="this.style.display='none'" />
+        </div>
+        <div class="flex-1 space-y-3 pl-0 lg:pl-20">
+          <a href="https://www.hermitagemuseum.org/?lng=ru" target="_blank" rel="noopener noreferrer" class="block text-[#B49567] hover:text-[#d4b88a] transition-colors font-munson text-sm md:text-base opacity-80 hover:opacity-100">Сайт Государственного Эрмитажа</a>
+          <a href="https://vk.com/hermitage_museum" target="_blank" rel="noopener noreferrer" class="block text-[#B49567] hover:text-[#d4b88a] transition-colors font-munson text-sm md:text-base opacity-80 hover:opacity-100">Официальное сообщество ВКонтакте Государственного Эрмитажа</a>
+          <a href="https://vk.com/hermitagevolunteers" target="_blank" rel="noopener noreferrer" class="block text-[#B49567] hover:text-[#d4b88a] transition-colors font-munson text-sm md:text-base opacity-80 hover:opacity-100">Официальное сообщество ВКонтакте Службы Волонтёров Эрмитажа</a>
+        </div>
+        <div class="flex-1 space-y-4 text-right">
+          <div>
+            <p class="text-[#B49567] font-munson text-sm md:text-base opacity-80">Государственный Эрмитаж</p>
+            <p class="text-[#B49567] font-munson text-sm md:text-base opacity-80">+7 (812) 710-90-79</p>
+            <a href="mailto:chancery@hermitage.ru" class="text-[#B49567] hover:text-[#d4b88a] transition-colors font-munson text-sm md:text-base opacity-80 hover:opacity-100">chancery@hermitage.ru</a>
+          </div>
+          <div>
+            <p class="text-[#B49567] font-munson text-sm md:text-base opacity-80">Служба Волонтёров Эрмитажа</p>
+            <p class="text-[#B49567] font-munson text-sm md:text-base opacity-80">+7 (812) 710-98-76</p>
+            <a href="mailto:volunteer@hermitage.ru" class="text-[#B49567] hover:text-[#d4b88a] transition-colors font-munson text-sm md:text-base opacity-80 hover:opacity-100">volunteer@hermitage.ru</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+  <div id="modalOverlay" class="modal-overlay fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="modal-content bg-[#965B4A] rounded-3xl max-w-6xl w-full max-h-[95vh] overflow-y-auto p-6 md:p-8 relative">
+      <button id="modalClose" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:scale-110 transition">
+        <img src="assets/images/vectors/close.svg" alt="Закрыть" class="w-6 h-6" />
+      </button>
+      <h2 id="modalTitle" class="text-2xl md:text-3xl font-carmen text-[#B49567] text-center mb-6">Название экспоната</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        <div>
+          <div class="bg-[#5A573F]/30 rounded-2xl overflow-hidden aspect-[4/3]">
+            <img id="modalImage" src="" alt="Картина" class="w-full h-full object-cover" />
+          </div>
+          <p id="modalAuthor" class="text-[#B49567]/80 text-sm mt-3 font-munson text-center lg:text-left">Автор: Неизвестен</p>
+        </div>
+        <div class="flex flex-col">
+          <p id="modalDescription" class="text-[#B9A997]/90 leading-relaxed font-munson text-base md:text-lg">Описание экспоната...</p>
+          <div class="flex items-center justify-end gap-4 mt-6 pt-4 border-t border-[#B49567]/20">
+            <span id="modalCounter" class="text-[#B49567]/70 font-munson text-sm">1 / 32</span>
+            <button id="modalPrev" class="w-10 h-10 rounded-full bg-[#5A573F]/30 hover:bg-[#5A573F]/50 flex items-center justify-center transition">
+              <img src="assets/images/vectors/arrow-left.svg" alt="Назад" class="w-5 h-5" />
+            </button>
+            <button id="modalNext" class="w-10 h-10 rounded-full bg-[#5A573F]/30 hover:bg-[#5A573F]/50 flex items-center justify-center transition">
+              <img src="assets/images/vectors/arrow-right.svg" alt="Вперед" class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './fonts.css';
+
+/* Глобальные стили */
+body {
+  background-color: #B9A997;
+  font-family: 'Munson Roman', serif;
+  color: #5A573F;
+  position: relative;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Carmen', serif;
+}
+
+/* Стили для модалки */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Контейнер тропы */
+.trail-container {
+  position: relative;
+  width: 100%;
+  max-width: 5xl;
+  margin: 0 auto;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+/* Стили для ячеек тропы */
+.trail-cell {
+  position: absolute;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  transition: transform 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.trail-cell:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.trail-cell:hover {
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.trail-cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* ===== БОКОВЫЕ БОРДЮРЫ (фон, на всю высоту сайта) ===== */
+.border-left-container,
+.border-right-container {
+  width: 48px;
+  max-width: 48px;
+  height: 100%;
+  min-height: 100vh;
+  z-index: 0;
+}
+
+.border-left-inner,
+.border-right-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Адаптив для бордюров - скрываем на планшетах и мобилках */
+@media (max-width: 1024px) {
+  .border-left-container,
+  .border-right-container {
+    display: none !important;
+  }
+}
+
+/* Стили для модального окна */
+.modal-content {
+  background-color: #965B4A;
+}
+
+.modal-content h2 {
+  color: #B49567;
+}
+
+.modal-content .text-white {
+  color: #B9A997 !important;
+}
+
+.modal-content .text-white\/80 {
+  color: rgba(185, 169, 151, 0.8) !important;
+}
+
+.modal-content .text-white\/90 {
+  color: rgba(185, 169, 151, 0.9) !important;
+}
+
+.modal-content .text-white\/70 {
+  color: rgba(185, 169, 151, 0.7) !important;
+}
+
+.modal-content .border-white\/20 {
+  border-color: rgba(180, 149, 103, 0.2) !important;
+}
+
+/* Адаптив для модалки */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    padding: 16px;
+  }
+}
+
+/* ===== АДАПТИВНОСТЬ ХЕДЕРА ===== */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+  header {
+    padding: 30px 0 !important;
+  }
+  
+  header .flex-shrink-0[style*="max-width: 412px"] {
+    max-width: 200px !important;
+    min-width: 50px !important;
+  }
+  
+  header .max-w-\[497px\] {
+    max-width: 55% !important;
+    min-height: 300px !important;
+    padding: 0 20px !important;
+  }
+  
+  header h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  header .py-8 {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  header {
+    padding: 20px 0 !important;
+  }
+  
+  /* Скрываем узоры внутри хедера */
+  header .flex-shrink-0[style*="max-width: 412px"] {
+    display: none !important;
+  }
+  
+  header .max-w-\[497px\] {
+    max-width: 85% !important;
+    width: 85% !important;
+    min-height: 250px !important;
+    padding: 0 16px !important;
+    border-width: 2px !important;
+  }
+  
+  header h1 {
+    font-size: 2rem !important;
+  }
+  
+  header p {
+    font-size: 0.9rem !important;
+  }
+  
+  header .py-8 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+  
+  header .min-h-\[60vh\] {
+    min-height: 50vh !important;
+  }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 480px) {
+  header {
+    padding: 15px 0 !important;
+  }
+  
+  header .max-w-\[497px\] {
+    max-width: 92% !important;
+    width: 92% !important;
+    min-height: 200px !important;
+    padding: 0 12px !important;
+    border-width: 1px !important;
+  }
+  
+  header h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  header p {
+    font-size: 0.8rem !important;
+  }
+  
+  header .py-8 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+  
+  header .min-h-\[60vh\] {
+    min-height: 40vh !important;
+  }
+  
+  /* Желтая полоска */
+  header .bg-\[#B49567\] {
+    height: 1px !important;
+    top: 3% !important;
+  }
+}
+
+/* ===== СТИЛИ ДЛЯ ФУТЕРА ===== */
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Адаптив для футера */
+@media (max-width: 1024px) {
+  footer .absolute.-left-16 {
+    display: none !important;
+  }
+  
+  footer .pl-0.lg\:pl-20 {
+    padding-left: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  footer .flex-col.md\:flex-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  footer .text-right {
+    text-align: left !important;
+  }
+  
+  footer .space-y-4 {
+    margin-top: 8px !important;
+  }
+  
+  footer .max-w-7xl {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  footer .max-w-7xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  footer .text-sm {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Стили для картинок в модальном окне */
+.modal-content .aspect-\[4\/3\] img {
+  object-fit: contain !important;
+  background-color: #2a1f1a;
+}
+
+/* Стиль для логотипа Эрмитажа в ячейке - только увеличение */
+.trail-cell[data-index="32"] img {
+  object-fit: contain !important;
+  padding: 15%;
+  transition: all 0.3s ease;
+}
+
+.trail-cell[data-index="32"]:hover img {
+  transform: scale(1.05);
+}
