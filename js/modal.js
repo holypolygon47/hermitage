@@ -13,6 +13,23 @@ const modalCounter = document.getElementById('modalCounter');
 
 let currentIndex = 0;
 
+// Функция для прокрутки модалки вверх
+function scrollModalToTop() {
+  if (modalOverlay) {
+    const modalContent = modalOverlay.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.scrollTop = 0;
+    }
+  }
+}
+
+// Функция для прокрутки описания в начало
+function scrollDescriptionToTop() {
+  if (modalDescription) {
+    modalDescription.scrollTop = 0;
+  }
+}
+
 // Открытие модалки
 export function openModal(index) {
   currentIndex = index;
@@ -21,6 +38,11 @@ export function openModal(index) {
   modalOverlay.classList.remove('hidden');
   modalOverlay.classList.add('flex');
   document.body.style.overflow = 'hidden';
+  // Прокручиваем в начало при открытии
+  setTimeout(() => {
+    scrollModalToTop();
+    scrollDescriptionToTop();
+  }, 50);
 }
 
 // Закрытие модалки
@@ -36,12 +58,25 @@ function renderModalData(index) {
   if (!data) return;
   
   modalTitle.textContent = data.modalTitle || 'Без названия';
-  modalImage.src = data.imageSrc || 'https://via.placeholder.com/600x400?text=No+Image';
+  
+  // Специальная обработка для 33-й ячейки (индекс 32)
+  let imageSrc = data.imageSrc;
+  if (index === 32) {
+    imageSrc = 'assets/images/content/33.png';
+  }
+  
+  modalImage.src = imageSrc || 'https://via.placeholder.com/600x400?text=No+Image';
   modalImage.alt = data.modalTitle || 'Картина';
-  modalImage.style.objectFit = 'contain'; // Чтобы картинка отображалась полностью
+  modalImage.style.objectFit = 'contain';
   modalAuthor.textContent = data.imageAuthor || 'Неизвестный автор';
   modalDescription.textContent = data.descriptionText || 'Описание отсутствует.';
   modalCounter.textContent = `${index + 1} / ${cellsData.length}`;
+  
+  // Прокручиваем в начало после обновления контента
+  setTimeout(() => {
+    scrollModalToTop();
+    scrollDescriptionToTop();
+  }, 50);
 }
 
 // Обновление кнопок навигации
@@ -56,6 +91,11 @@ export function nextCell() {
     currentIndex++;
     renderModalData(currentIndex);
     updateNavigationButtons();
+    // Прокручиваем в начало
+    setTimeout(() => {
+      scrollModalToTop();
+      scrollDescriptionToTop();
+    }, 50);
   }
 }
 
@@ -65,27 +105,37 @@ export function prevCell() {
     currentIndex--;
     renderModalData(currentIndex);
     updateNavigationButtons();
+    // Прокручиваем в начало
+    setTimeout(() => {
+      scrollModalToTop();
+      scrollDescriptionToTop();
+    }, 50);
   }
 }
 
 // Инициализация обработчиков событий
 export function initModalEvents() {
-  // Закрытие по крестику
   modalClose.addEventListener('click', closeModal);
   
-  // Закрытие по оверлею
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
   
-  // Закрытие по ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowRight' && !modalOverlay.classList.contains('hidden')) nextCell();
-    if (e.key === 'ArrowLeft' && !modalOverlay.classList.contains('hidden')) prevCell();
+    if (e.key === 'ArrowRight' && !modalOverlay.classList.contains('hidden')) {
+      nextCell();
+    }
+    if (e.key === 'ArrowLeft' && !modalOverlay.classList.contains('hidden')) {
+      prevCell();
+    }
   });
   
-  // Кнопки навигации
-  modalPrev.addEventListener('click', prevCell);
-  modalNext.addEventListener('click', nextCell);
+  modalPrev.addEventListener('click', () => {
+    prevCell();
+  });
+  
+  modalNext.addEventListener('click', () => {
+    nextCell();
+  });
 }

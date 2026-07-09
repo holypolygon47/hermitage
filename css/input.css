@@ -8,7 +8,7 @@
 body {
   background-color: #B9A997;
   font-family: 'Munson Roman', serif;
-  color: #5A573F;
+  color: #965B4A;
   position: relative;
   min-height: 100vh;
 }
@@ -103,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Стили для модального окна */
 .modal-content {
-  background-color: #965B4A;
+  background-color: #965B4A; /* изменено с #965B4A */
 }
 
 .modal-content h2 {
@@ -305,4 +305,290 @@ footer a:hover {
 
 .trail-cell[data-index="32"]:hover img {
   transform: scale(1.05);
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ МОДАЛКИ ===== */
+
+/* Темный фон для контейнера картинки в модалке */
+.modal-content .bg-\[#2a1f1a\] {
+  background-color: #2a1f1a;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Стили для скролла внутри модалки */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(90, 87, 63, 0.3);
+  border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #B49567;
+  border-radius: 8px;
+}
+
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #B49567 rgba(90, 87, 63, 0.3);
+}
+
+/* Скрываем верхнюю линию хедера на мобильных устройствах */
+@media (max-width: 640px) {
+  header .absolute.left-0.w-full.bg-\[\#B49567\] {
+    display: none !important;
+  }
+}
+
+/* ===== УЛУЧШЕННАЯ АДАПТИВНОСТЬ КРЕСТИКА В МОДАЛКЕ ===== */
+
+/* Кнопка закрытия модалки - только крестик без фона и обводки */
+#modalClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+#modalClose:hover,
+#modalClose:active,
+#modalClose:focus {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none;
+}
+
+#modalClose img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Контейнер модалки с отступами для крестика */
+.modal-content {
+  padding-top: 56px !important;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+/* Заголовок модалки с отступом справа */
+#modalTitle {
+  padding-right: 48px;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* --- Мобильные устройства (до 640px) --- */
+@media (max-width: 640px) {
+  #modalClose {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+
+  #modalClose img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .modal-content {
+    padding-top: 44px !important;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 16px;
+    border-radius: 16px !important;
+    max-width: 96vw;
+    max-height: 94vh;
+  }
+
+  /* Центрируем только заголовок - убираем лишний правый отступ */
+  #modalTitle {
+    padding-right: 0 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    text-align: center !important;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Центрируем картинку */
+  .modal-content .grid.grid-cols-1.lg\:grid-cols-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .modal-content .grid.grid-cols-1.lg\:grid-cols-2 > div:first-child {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Остальные блоки остаются слева */
+  .modal-content .grid.grid-cols-1.lg\:grid-cols-2 > div:last-child {
+    order: 2;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  /* Изображение в модалке - центрируем */
+  .modal-content .aspect-\[4\/3\] {
+    aspect-ratio: 4/3;
+    max-height: 220px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content .aspect-\[4\/3\] img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Автор остается слева */
+  #modalAuthor {
+    font-size: 0.7rem !important;
+    margin-top: 2px;
+    text-align: left !important;
+    width: 100%;
+  }
+
+  /* Описание остается слева */
+  #modalDescription {
+    font-size: 0.85rem !important;
+    line-height: 1.4;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left !important;
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  /* Кнопки навигации остаются справа */
+  .modal-content .flex.items-center.justify-end.gap-4 {
+    margin-top: 8px;
+    padding-top: 8px;
+    justify-content: flex-end !important;
+    width: 100%;
+  }
+
+  .modal-content .w-10.h-10 {
+    width: 32px;
+    height: 32px;
+  }
+
+  .modal-content .w-10.h-10 img {
+    width: 14px;
+    height: 14px;
+  }
+
+  #modalCounter {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* --- Очень маленькие экраны (до 400px) --- */
+@media (max-width: 400px) {
+  #modalClose {
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+  }
+
+  #modalClose img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .modal-content {
+    padding-top: 38px !important;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 12px;
+    border-radius: 12px !important;
+    max-width: 98vw;
+  }
+
+  #modalTitle {
+    padding-right: 0 !important;
+    font-size: 0.95rem !important;
+    text-align: center !important;
+  }
+
+  .modal-content .aspect-\[4\/3\] {
+    max-height: 160px;
+    max-width: 260px;
+  }
+
+  #modalDescription {
+    font-size: 0.75rem !important;
+    max-height: 140px;
+  }
+
+  .modal-content .w-10.h-10 {
+    width: 28px;
+    height: 28px;
+  }
+
+  .modal-content .w-10.h-10 img {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* --- Планшеты (641-1024px) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .modal-content {
+    padding-top: 60px !important;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #modalTitle {
+    padding-right: 52px;
+    font-size: 1.5rem !important;
+  }
+
+  #modalClose {
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  #modalClose img {
+    width: 26px;
+    height: 26px;
+  }
 }
